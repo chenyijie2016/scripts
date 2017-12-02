@@ -1,1 +1,1 @@
-sudo apt-get install mongodb-org
+sudo apt-get install mongodb # old version 2.60

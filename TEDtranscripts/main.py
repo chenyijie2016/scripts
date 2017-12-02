@@ -1,15 +1,12 @@
 import json
 import requests
 
-_url = 'https://www.ted.com/talks/'
-url_ = '/transcript.json?language=zh-cn'
-
+url = 'https://www.ted.com/talks/{ted_id}/transcript.json?language=zh-cn'
 
 def main():
-    number = input('input scritpt number:')
-    res = requests.get(_url + str(number) + url_)
-    transcript = json.loads(res.content.decode('utf-8'), encoding='utf-8')
-
+    ted_id = input('input scritpt ted_id:')
+    res = requests.get(url.format(ted_id=ted_id))
+    transcript= json.loads(res.content.decode('utf-8'), encoding='utf-8')
     res = ['']
     for parahraph in transcript["paragraphs"]:
         # print(parahraph)
@@ -20,7 +17,7 @@ def main():
                 res.append(item["text"])
         res.append('\n')
 
-    f = open(str(number) + 'script.txt', 'w')
+    f = open(str(ted_id) + 'script.txt', 'w')
     for line in res:
         try:
             f.write(line + ' ')
